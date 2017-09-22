@@ -1,0 +1,18 @@
+{
+  "name": "@financial-times/origami-imageset-data",
+  "version": "1.0.0",
+  "description": "Fastly service to serve Origami imageset images, with TLS support.",
+  "author": "Jake Champion <jake.champion@ft.com>",
+  "private": true,
+  "license": "MIT",
+  "dependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^3.5.0",
+    "prettier": "^1.6.1"
+  },
+  "scripts": {
+    "test": "mocha --colors",
+    "fmt": "terraform fmt && prettier --write 'test/**/*.js'"
+  }
+}
