@@ -8,7 +8,7 @@ describe("origami-imageset-data", () => {
   it("serve lionel barber", () => {
     return request
       .get(
-        "http://origami-images.ft.com.global.prod.fastly.net/fthead/v1/lionel-barber"
+        "https://origami-images.ft.com/fthead/v1/lionel-barber"
       )
       .then(res => {
         expect(res).to.have.status(200);
@@ -19,7 +19,7 @@ describe("origami-imageset-data", () => {
   it("purging requires an API key", () => {
     return request
       .purge(
-        "http://origami-images.ft.com.global.prod.fastly.net/fthead/v1/lionel-barber"
+        "https://origami-images.ft.com/fthead/v1/lionel-barber"
       )
       .then(
         res => {
