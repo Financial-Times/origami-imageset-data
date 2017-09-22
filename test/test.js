@@ -7,9 +7,7 @@ chai.use(require("chai-http"));
 describe("origami-imageset-data", () => {
   it("serve lionel barber", () => {
     return request
-      .get(
-        "https://origami-images.ft.com/fthead/v1/lionel-barber"
-      )
+      .get("https://origami-images.ft.com/fthead/v1/lionel-barber")
       .then(res => {
         expect(res).to.have.status(200);
         expect(res).to.have.header("Content-Type", "image/png");
@@ -18,9 +16,7 @@ describe("origami-imageset-data", () => {
 
   it("purging requires an API key", () => {
     return request
-      .purge(
-        "https://origami-images.ft.com/fthead/v1/lionel-barber"
-      )
+      .purge("https://origami-images.ft.com/fthead/v1/lionel-barber")
       .then(
         res => {
           throw new Error("Expected request to be rejected but was resolved.");

@@ -10,6 +10,10 @@ sub vcl_recv {
 
 #FASTLY recv
 
+  if (req.request == "FASTLYPURGE") {
+    set req.http.Fastly-Purge-Requires-Auth = "1";
+  }
+
   if (req.request != "HEAD" && req.request != "GET" && req.request != "FASTLYPURGE") {
     return(pass);
   }
@@ -30,10 +34,6 @@ sub vcl_fetch {
   }
 
 #FASTLY fetch
-
-  if (req.request == "FASTLYPURGE") {
-    set req.http.Fastly-Purge-Requires-Auth = "1";
-  }
 
   if (http_status_matches(beresp.status, "500,502,503,504") && req.restarts < 1 && (req.request == "GET" || req.request == "HEAD")) {
     restart;
