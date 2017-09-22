@@ -17,7 +17,7 @@ jobs:
       - checkout
       - run:
           name: Validate Terraform Formatting
-          command: "[ -z \"$(terraform fmt -write=false)\" ] || { terraform fmt -write=false -diff; exit 1; }"
+          command: "terraform fmt -check=true terraform/"
 
   validate_node:
     docker:
@@ -47,13 +47,13 @@ jobs:
           command: apk add bash jq
       - run:
           name: Initialize Terraform
-          command: terraform init
+          command: terraform init terraform/
       - run:
           name: Import State
-          command: terraform import fastly_service_v1.origami_imageset_data 3cUsylommuzAVcvd80Sk5A
+          command: terraform import -config=terraform/ fastly_service_v1.origami_imageset_data 3cUsylommuzAVcvd80Sk5A
       - run:
           name: Deploy
-          command: .circleci/do-exclusively.sh --branch master terraform apply
+          command: .circleci/do-exclusively.sh --branch master terraform apply terraform/
 
   test:
     docker:
