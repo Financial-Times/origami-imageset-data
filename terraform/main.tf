@@ -1,5 +1,5 @@
 provider "fastly" {
-  version = "0.12.29"
+  version = "0.13"
 }
 
 resource "fastly_service_v1" "origami_imageset_data" {
