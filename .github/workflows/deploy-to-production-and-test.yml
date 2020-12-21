@@ -4,7 +4,7 @@ on:
     branches: [ master ]
 env:
   terraform_version: '0.12.29'
-  terraform_working_dir: 'fastly/terraform/'
+  terraform_working_dir: 'terraform/'
   fastly_service_id: '3cUsylommuzAVcvd80Sk5A'
 jobs:
   deploy:
