@@ -1,5 +1,5 @@
 name: Test
-on: [pull_request_target]
+on: [pull_request]
 env:
   terraform_version: '0.12.29'
   terraform_working_dir: 'fastly/terraform/'
