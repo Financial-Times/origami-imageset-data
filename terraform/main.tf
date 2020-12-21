@@ -1,6 +1,4 @@
-provider "fastly" {
-  version = "0.13"
-}
+provider "fastly" {}
 
 resource "fastly_service_v1" "origami_imageset_data" {
   name = "Origami Imageset Data (github.com/Financial-Times/origami-imageset-data)"
@@ -49,17 +47,17 @@ resource "fastly_service_v1" "origami_imageset_data" {
 
   vcl {
     name    = "main.vcl"
-    content = "${file("${path.module}/../vcl/main.vcl")}"
+    content = file("${path.module}/../vcl/main.vcl")
     main    = true
   }
 
   vcl {
     name    = "fastly-boilerplate.vcl"
-    content = "${file("${path.module}/../vcl/fastly-boilerplate.vcl")}"
+    content = file("${path.module}/../vcl/fastly-boilerplate.vcl")
   }
 
   vcl {
     name    = "multi-region-routing.vcl"
-    content = "${file("${path.module}/../vcl/multi-region-routing.vcl")}"
+    content = file("${path.module}/../vcl/multi-region-routing.vcl")
   }
 }
