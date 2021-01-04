@@ -22,10 +22,7 @@ describe("origami-imageset-data", () => {
           throw new Error("Expected request to be rejected but was resolved.");
         },
         err => {
-          expect(err).to.have.status(400);
-          expect(err.response.error.toString()).to.eq(
-            "Error: cannot PURGE /fthead/v1/lionel-barber (400)"
-          );
+          expect(err).to.have.status(401);
         }
       );
   });
