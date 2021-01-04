@@ -9,6 +9,9 @@ env:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.terraform_working_dir }}
     steps:
       - uses: actions/checkout@v2
 
@@ -18,14 +21,11 @@ jobs:
         with:
           node-version: 12.x
 
-      - run: npm ci
-
       - uses: hashicorp/setup-terraform@v1
 
       - name: Terraform fmt
         id: fmt
         run: terraform fmt -check
-        working-directory: ${{ env.terraform_working_dir }}
 
       - name: Turnstyle
         uses: softprops/turnstyle@v1
@@ -39,27 +39,23 @@ jobs:
       - name: Terraform import
         id: import
         run: terraform import fastly_service_v1.app ${{ env.fastly_service_id }}
-        working-directory: ${{ env.terraform_working_dir }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           FASTLY_API_KEY: ${{ secrets.FASTLY_API_KEY }}
 
       - name: Terraform Validate
         id: validate
-        working-directory: ${{ env.terraform_working_dir }}
         run: terraform validate -no-color
 
       - name: Terraform Plan
         id: plan
         run: terraform plan -no-color
-        working-directory: ${{ env.terraform_working_dir }}
         env:
           FASTLY_API_KEY: ${{ secrets.FASTLY_API_KEY }}
 
       - name: Terraform Apply
         id: apply
         run: terraform apply -no-color --auto-approve
-        working-directory: ${{ env.terraform_working_dir }}
         env:
           FASTLY_API_KEY: ${{ secrets.FASTLY_API_KEY }}
 
