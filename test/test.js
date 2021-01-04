@@ -17,13 +17,8 @@ describe("origami-imageset-data", () => {
   it("purging requires an API key", () => {
     return request
       .purge("https://origami-images.ft.com/fthead/v1/lionel-barber")
-      .then(
-        res => {
-          throw new Error("Expected request to be rejected but was resolved.");
-        },
-        err => {
-          expect(err).to.have.status(401);
-        }
-      );
+      .then(res => {
+        expect(res).to.have.status(401);
+      });
   });
 });
