@@ -60,4 +60,32 @@ resource "fastly_service_v1" "origami_imageset_data" {
     name    = "multi-region-routing.vcl"
     content = file("${path.module}/../vcl/multi-region-routing.vcl")
   }
+
+  # waf settings
+  condition {
+    name      = "WAF_Prefetch"
+    priority  = 10
+    statement = "req.backend.is_origin && !req.http.rqpass"
+    type      = "PREFETCH"
+  }
+  condition {
+    name      = "waf-soc-logging"
+    priority  = 10
+    statement = "waf.executed"
+    type      = "RESPONSE"
+  }
+  condition {
+    name      = "false"
+    priority  = 10
+    statement = "!req.url"
+    type      = "REQUEST"
+  }
+  response_object {
+    name              = "WAF_Response"
+    response          = "Forbidden"
+    status            = "403"
+    content           = "{ \"Access Denied\" : \"\"} req.http.x_request_id {\"\" }"
+    content_type      = "application/json"
+    request_condition = "false"
+  }
 }
