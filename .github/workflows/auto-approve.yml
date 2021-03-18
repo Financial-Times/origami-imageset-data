@@ -18,6 +18,6 @@ jobs:
         github-token: "${{ secrets.ORIGAMI_FOX_ACCESS_TOKEN }}"
 
     # We "trust" dependabot updates (this still requires all other checks to pass!)
-    - uses: hmarr/auto-approve-action@5d04a5ca6da9aeb8ca9f31a5239b96fc3e003029
+    - uses: hmarr/auto-approve-action@2.1.0
       with:
         github-token: "${{ secrets.ORIGAMI_FOX_ACCESS_TOKEN }}"
