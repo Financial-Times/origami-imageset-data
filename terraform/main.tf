@@ -21,6 +21,7 @@ resource "fastly_service_v1" "origami_imageset_data" {
     host           = "origami-imageset-data-us.s3.amazonaws.com"
     path           = "/__gtg"
     check_interval = 60000
+    timeout        = 5000
   }
 
   backend {
@@ -37,6 +38,7 @@ resource "fastly_service_v1" "origami_imageset_data" {
     host           = "origami-imageset-data-eu.s3.amazonaws.com"
     path           = "/__gtg"
     check_interval = 60000
+    timeout        = 5000
   }
 
   gzip {
